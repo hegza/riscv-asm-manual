@@ -905,15 +905,24 @@ fail_msg:
 
 Pseudoinstruction            | Base Instruction(s)                                           | Meaning   | Comment
 :----------------------------|:--------------------------------------------------------------|:----------|:--------
-la rd, symbol                | auipc rd, symbol[31:12]; addi rd, rd, symbol[11:0]            | Load address | With `.option nopic` (Default)
-la rd, symbol                | auipc rd, symbol@GOT[31:12]; l{w\|d} rd, symbol@GOT[11:0]\(rd\) | Load address | With `.option pic`
-lla rd, symbol               | auipc rd, symbol[31:12]; addi rd, rd, symbol[11:0]            | Load local address
-lga rd, symbol               | auipc rd, symbol@GOT[31:12]; l{w\|d} rd, symbol@GOT[11:0]\(rd\) | Load global address
-l{b\|h\|w\|d} rd, symbol     | auipc rd, symbol[31:12]; l{b\|h\|w\|d} rd, symbol[11:0]\(rd\) | Load global
-l{bu\|hu\|wu} rd, symbol     | auipc rd, symbol[31:12]; l{bu\|hu\|wu} rd, symbol[11:0]\(rd\) | Load global, unsigned
-s{b\|h\|w\|d} rd, symbol, rt | auipc rt, symbol[31:12]; s{b\|h\|w\|d} rd, symbol[11:0]\(rt\) | Store global
-fl{w\|d} rd, symbol, rt      | auipc rt, symbol[31:12]; fl{w\|d} rd, symbol[11:0]\(rt\)      | Floating-point load global
-fs{w\|d} rd, symbol, rt      | auipc rt, symbol[31:12]; fs{w\|d} rd, symbol[11:0]\(rt\)      | Floating-point store global
+la rd, symbol                | auipc rd, symbol[31:12]; \
+                               addi rd, rd, symbol[11:0]                                     | Load address | With `.option nopic` (Default)
+la rd, symbol                | auipc rd, symbol@GOT[31:12]; \
+                               l{w\|d} rd, symbol@GOT[11:0]\(rd\)                            | Load address | With `.option pic`
+lla rd, symbol               | auipc rd, symbol[31:12]; \
+                               addi rd, rd, symbol[11:0]                                     | Load local address
+lga rd, symbol               | auipc rd, symbol@GOT[31:12]; \
+                               l{w\|d} rd, symbol@GOT[11:0]\(rd\)                            | Load global address
+l{b\|h\|w\|d} rd, symbol     | auipc rd, symbol[31:12]; \
+                               l{b\|h\|w\|d} rd, symbol[11:0]\(rd\)                          | Load global
+l{bu\|hu\|wu} rd, symbol     | auipc rd, symbol[31:12]; \
+                               l{bu\|hu\|wu} rd, symbol[11:0]\(rd\)                          | Load global, unsigned
+s{b\|h\|w\|d} rd, symbol, rt | auipc rt, symbol[31:12]; \
+                               s{b\|h\|w\|d} rd, symbol[11:0]\(rt\)                          | Store global
+fl{w\|d} rd, symbol, rt      | auipc rt, symbol[31:12]; \
+                               fl{w\|d} rd, symbol[11:0]\(rt\)                               | Floating-point load global
+fs{w\|d} rd, symbol, rt      | auipc rt, symbol[31:12]; \
+                               fs{w\|d} rd, symbol[11:0]\(rt\)                               | Floating-point store global
 nop                          | addi x0, x0, 0                                                | No operation
 li rd, immediate             | _Myriad sequences_[^1]                                        | Load immediate
 mv rd, rs                    | addi rd, rs, 0                                                | Copy register
