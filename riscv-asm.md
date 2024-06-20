@@ -1,3 +1,8 @@
+---
+date: June 20, 2024
+geometry: margin=6.35mm,bottom=1.5cm
+output: pdf_document
+---
 # RISC-V Assembly Programmer's Manual
 
 # Copyright and License Information
