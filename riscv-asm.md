@@ -13,10 +13,6 @@ GNU as and LLVM's assembler support. Other assemblers might not support the
 same directives or pseudoinstructions; their dialects are outside the scope
 of this document.
 
-## Command-Line Arguments
-
-I think it's probably better to beef up the binutils documentation rather than
-duplicating it here.
 
 ## Registers
 
