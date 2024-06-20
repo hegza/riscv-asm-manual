@@ -75,7 +75,6 @@ x28       | t3          | temporary register 3                  | no
 x29       | t4          | temporary register 4                  | no
 x30       | t5          | temporary register 5                  | no
 x31       | t6          | temporary register 6                  | no
-pc        | _(none)_    | program counter                       | _n/a_
 
 _Registers of the RV32I. Based on RISC-V documentation and Patterson and
 Waterman "The RISC-V Reader" (2017)_
