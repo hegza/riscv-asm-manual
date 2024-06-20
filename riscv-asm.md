@@ -149,7 +149,8 @@ Directive    | Arguments                      | Description
 .macro       | name arg1 [, argn]             | begin macro definition \\argname to substitute
 .endm        |                                | end macro definition
 .type        | symbol, @function              | accepted for source compatibility
-.option      | {arch,rvc,norvc,pic,nopic,relax,norelax,push,pop} | RISC-V options. Refer to [.option](#.option) for a more detailed description.
+.option      | {arch,rvc,norvc,pic,nopic,\
+                relax,norelax,push,pop}       | RISC-V options. Refer to [.option](#.option) for a more detailed description.
 .byte        | expression [, expression]*     | 8-bit comma separated words
 .2byte       | expression [, expression]*     | 16-bit comma separated words
 .half        | expression [, expression]*     | 16-bit comma separated words
