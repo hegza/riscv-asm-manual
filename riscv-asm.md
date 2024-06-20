@@ -15,7 +15,7 @@ The RISC-V Assembly Programmer's Manual is
 
 It is licensed under the Creative Commons Attribution 4.0 International License
 (CC-BY 4.0). The full license text is available at
-https://creativecommons.org/licenses/by/4.0/.
+<https://creativecommons.org/licenses/by/4.0/>.
 
 # Scope
 
@@ -110,7 +110,6 @@ detail.
 
 (TBA)
 
-
 # Addressing
 
 Addressing formats like %pcrel_lo().  We can just link to the RISC-V PS ABI
@@ -119,15 +118,17 @@ document to describe what the relocations actually do.
 # Instruction Set
 
 Official Specifications webpage:
-- https://riscv.org/specifications/
+
+- <https://riscv.org/specifications/>
 
 Latest Specifications draft repository:
-- https://github.com/riscv/riscv-isa-manual
+
+- <https://github.com/riscv/riscv-isa-manual>
 
 ## Instructions
 
 # RISC-V ISA Specifications
-https://riscv.org/specifications/
+<https://riscv.org/specifications/>
 
 ## Instruction Aliases
 
@@ -136,7 +137,7 @@ ALIAS line from opcodes/riscv-opc.c
 To better diagnose situations where the program flow reaches an unexpected
 location, you might want to emit there an instruction that's known to trap. You
 can use an `UNIMP` pseudoinstruction, which should trap in nearly all systems.
-The *de facto* standard implementation of this instruction is:
+The _de facto_ standard implementation of this instruction is:
 
 - `C.UNIMP`: `0000`. The all-zeroes pattern is not a valid instruction. Any
   system which traps on invalid instructions will thus trap on this `UNIMP`
@@ -266,6 +267,7 @@ should take care to the execution of the code regions around
 `.option push`/`.option arch`/`.option pop`.
 
 Syntax for `.option arch`:
+
 ```
 .option arch, <EXTENSIONS-OR-FULLARCH>
 
@@ -446,8 +448,8 @@ Absolute addressing
 The following example shows how to load an absolute address:
 
 ```assembly
-	lui	a0, %hi(msg + 1)
-	addi	a0, a0, %lo(msg + 1)
+ lui a0, %hi(msg + 1)
+ addi a0, a0, %lo(msg + 1)
 ```
 
 Which generates the following assembler output and relocations
@@ -468,8 +470,8 @@ The following example shows how to load a PC-relative address:
 
 ```assembly
 1:
-	auipc	a0, %pcrel_hi(msg + 1)
-	addi	a0, a0, %pcrel_lo(1b)
+ auipc a0, %pcrel_hi(msg + 1)
+ addi a0, a0, %pcrel_lo(1b)
 ```
 
 Which generates the following assembler output and relocations
@@ -490,8 +492,8 @@ The following example shows how to load an address from the GOT:
 
 ```assembly
 1:
-	auipc	a0, %got_pcrel_hi(msg + 1)
-	ld	a0, %pcrel_lo(1b)(a0)
+ auipc a0, %got_pcrel_hi(msg + 1)
+ ld a0, %pcrel_lo(1b)(a0)
 ```
 
 Which generates the following assembler output and relocations
@@ -512,24 +514,24 @@ The following example shows the `li` pseudoinstruction which
 is used to load immediate values:
 
 ```assembly
-	.equ	CONSTANT, 0xdeadbeef
+ .equ CONSTANT, 0xdeadbeef
 
-	li	a0, CONSTANT
+ li a0, CONSTANT
 ```
 
 Which, for RV32I, generates the following assembler output, as seen by `objdump`:
 
 ```assembly
 00000000 <.text>:
-   0:	deadc537          	lui	a0,0xdeadc
-   4:	eef50513          	addi	a0,a0,-273 # deadbeef <CONSTANT+0x0>
+   0: deadc537           lui a0,0xdeadc
+   4: eef50513           addi a0,a0,-273 # deadbeef <CONSTANT+0x0>
 ```
 
 Load Upper Immediate's Immediate
 -----------------------------------
 
-The immediate argument to `lui` is an integer in the interval [0x0, 0xfffff]. 
-Its compressed form, `c.lui`, accepts only those in the subintervals [0x1, 0x1f] and [0xfffe0, 0xfffff]. 
+The immediate argument to `lui` is an integer in the interval [0x0, 0xfffff].
+Its compressed form, `c.lui`, accepts only those in the subintervals [0x1, 0x1f] and [0xfffe0, 0xfffff].
 
 Signed Immediates for I- and S-Type Instructions
 -------------------------
@@ -549,9 +551,9 @@ in the C and C++ standards (i.e., decimal floating-point literals with decimal
 exponents as well as hexadecimal floating-point literals with binary exponents).
 
 Here are some examples:
-* 3.14159
-* 0.271828e1
-* 0x0.3p-4
+- 3.14159
+- 0.271828e1
+- 0x0.3p-4
 
 NOTE: The detailed format of the floating point immediate value can be
 referenced on [this page](https://en.cppreference.com/w/cpp/language/floating_literal)
@@ -568,9 +570,9 @@ register, the accpted immediate is defined in [Floating-point literals](fp-liter
 and the reference table can be found in [FLI operands reference table](fli-operand-value).
 
 ```assembly
-	fli.s	fa0, 0x1p-15
-	fli.s	fa1, 0.00390625
-	fli.s	fa2, 6.25e-02
+ fli.s fa0, 0x1p-15
+ fli.s fa1, 0.00390625
+ fli.s fa2, 6.25e-02
 ```
 
 The tool should reject any value that does not exactly match a floating-point
@@ -583,13 +585,12 @@ then load it into a floating point register using the load global
 pseudoinstruction (`fl{h|w|d|q}`).
 
 ```assembly
-	.data
+ .data
 .VAL:
-	.float .0x1p+17
-	.text
-	flw fa0, .VAL, t0
+ .float .0x1p+17
+ .text
+ flw fa0, .VAL, t0
 ```
-
 
 <a name="fli-operand-value"></a>FLI operands reference table
 
@@ -640,7 +641,7 @@ symbol addresses using the correct sequence based on whether the code is being
 assembled as PIC:
 
 ```assembly
-	la	a0, msg + 1
+ la a0, msg + 1
 ```
 
 For non-PIC this is an alias for the `lla` pseudoinstruction documented below.
@@ -658,7 +659,7 @@ The following example shows the `lla` pseudoinstruction which is used to load
 local symbol addresses:
 
 ```assembly
-	lla	a0, msg + 1
+ lla a0, msg + 1
 ```
 
 This generates the following instructions and relocations as seen by `objdump`:
@@ -678,7 +679,7 @@ The following example shows the `lga` pseudoinstruction which is used to load
 global symbol addresses:
 
 ```assembly
-	lga	a0, msg + 1
+ lga a0, msg + 1
 ```
 
 This generates the following instructions and relocations as seen by `objdump`
@@ -698,11 +699,11 @@ Load and Store Global
 The following pseudoinstructions are available to load from and store to
 global objects:
 
-  * `l{b|h|w|d} <rd>, <symbol>`: load byte, half word, word or double word from global[^1]
-  * `l{bu|hu|wu} <rd>, <symbol>`: load unsigned byte, half word, or word from global[^1]
-  * `s{b|h|w|d} <rd>, <symbol>, <rt>`: store byte, half word, word or double word to global[^2]
-  * `fl{h|w|d|q} <rd>, <symbol>, <rt>`: load half, float, double or quad precision from global[^2]
-  * `fs{h|w|d|q} <rd>, <symbol>, <rt>`: store half, float, double or quad precision to global[^2]
+- `l{b|h|w|d} <rd>, <symbol>`: load byte, half word, word or double word from global[^1]
+- `l{bu|hu|wu} <rd>, <symbol>`: load unsigned byte, half word, or word from global[^1]
+- `s{b|h|w|d} <rd>, <symbol>, <rt>`: store byte, half word, word or double word to global[^2]
+- `fl{h|w|d|q} <rd>, <symbol>, <rt>`: load half, float, double or quad precision from global[^2]
+- `fs{h|w|d|q} <rd>, <symbol>, <rt>`: store half, float, double or quad precision to global[^2]
 
 [^1]: the first operand is implicitly used as a scratch register.
 [^2]: the last operand specifies the scratch register to be used.
@@ -710,10 +711,10 @@ global objects:
 The following example shows how these pseudoinstructions are used:
 
 ```assembly
-	lw	a0, var1
-	fld	fa0, var2, t0
-	sw	a0, var3, t0
-	fsd	fa0, var4, t0
+ lw a0, var1
+ fld fa0, var2, t0
+ sw a0, var3, t0
+ fsd fa0, var4, t0
 ```
 
 Which generates the following assembler output and relocations
@@ -746,10 +747,10 @@ The following example shows loading a constant using the `%hi` and
 `%lo` assembler functions.
 
 ```assembly
-	.equ	UART_BASE, 0x40003080
+ .equ UART_BASE, 0x40003080
 
-	lui	a0, %hi(UART_BASE)
-	addi	a0, a0, %lo(UART_BASE)
+ lui a0, %hi(UART_BASE)
+ addi a0, a0, %lo(UART_BASE)
 ```
 
 Which generates the following assembler output
@@ -757,8 +758,8 @@ as seen by `objdump`:
 
 ```assembly
 0000000000000000 <.text>:
-   0:	40003537          	lui	a0,0x40003
-   4:	08050513          	addi	a0,a0,128 # 40003080 <UART_BASE>
+   0: 40003537           lui a0,0x40003
+   4: 08050513           addi a0,a0,128 # 40003080 <UART_BASE>
 ```
 
 Far Branches
@@ -770,20 +771,20 @@ unconditional jump.  For example
 
 ```assembly
 target:
-	bne a0, a1, target
+ bne a0, a1, target
 .rep 1024
-	nop
+ nop
 .endr
-	bne a0, a1, target
+ bne a0, a1, target
 ```
 
 ends up as
 
 ```
-       0:	00b51063          	bne	a0,a1,0 <target>
+       0: 00b51063           bne a0,a1,0 <target>
 ...
-    1004:	00b50463          	beq	a0,a1,100c <target+0x100c>
-    1008:	ff9fe06f          	j	0 <target>
+    1004: 00b50463           beq a0,a1,100c <target+0x100c>
+    1008: ff9fe06f           j 0 <target>
 ```
 
 Function Calls
@@ -792,10 +793,10 @@ Function Calls
 The following pseudoinstructions are available to call subroutines far from
 the current position:
 
-  * `call	<symbol>`: call away subroutine[^3]
-  * `call	<rd>, <symbol>`: call away subroutine[^4]
-  * `tail	<symbol>`: tail call away subroutine[^5]
-  * `jump	<symbol>, <rt>`: jump to away routine[^6]
+- `call <symbol>`: call away subroutine[^3]
+- `call <rd>, <symbol>`: call away subroutine[^4]
+- `tail <symbol>`: tail call away subroutine[^5]
+- `jump <symbol>, <rt>`: jump to away routine[^6]
 
 [^3]: `ra` is implicitly used to save the return address.
 [^4]: similar to `call <symbol>`, but `<rd>` is used to save the return address instead.
@@ -805,9 +806,9 @@ the current position:
 The following example shows how these pseudoinstructions are used:
 
 ```assembly
-	call	func1
-	tail	func2
-	jump	func3, t0
+ call func1
+ tail func2
+ jump func3, t0
 ```
 
 Which generates the following assembler output and relocations
@@ -835,12 +836,12 @@ round-to-zero can be written as `fcvt.w.s a0, fa0, rtz`. If unspecified, the
 default `dyn` rounding mode will be used.
 
 Supported rounding modes are as follows (must be specified in lowercase):
-* `rne`: round to nearest, ties to even
-* `rtz`: round towards zero
-* `rdn`: round down
-* `rup`: round up
-* `rmm`: round to nearest, ties to max magnitude
-* `dyn`: dynamic rounding mode (the rounding mode specified in the `frm` field
+- `rne`: round to nearest, ties to even
+- `rtz`: round towards zero
+- `rdn`: round down
+- `rup`: round up
+- `rmm`: round to nearest, ties to max magnitude
+- `dyn`: dynamic rounding mode (the rounding mode specified in the `frm` field
 of the `fcsr` register is used)
 
 Control and Status Registers
@@ -924,7 +925,7 @@ s{b\|h\|w\|d} rd, symbol, rt | auipc rt, symbol[31:12]; s{b\|h\|w\|d} rd, symbol
 fl{w\|d} rd, symbol, rt      | auipc rt, symbol[31:12]; fl{w\|d} rd, symbol[11:0]\(rt\)      | Floating-point load global
 fs{w\|d} rd, symbol, rt      | auipc rt, symbol[31:12]; fs{w\|d} rd, symbol[11:0]\(rt\)      | Floating-point store global
 nop                          | addi x0, x0, 0                                                | No operation
-li rd, immediate             | *Myriad sequences*[^1]                                        | Load immediate
+li rd, immediate             | _Myriad sequences_[^1]                                        | Load immediate
 mv rd, rs                    | addi rd, rs, 0                                                | Copy register
 not rd, rs                   | xori rd, rs, -1                                               | Ones’ complement
 neg rd, rs                   | sub rd, x0, rs                                                | Two’s complement
