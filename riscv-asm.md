@@ -85,18 +85,6 @@ function calls, while the **argument registers** `a0` to `a7` and the
 specialized registers such as `sp` by convention will be discussed later in more
 detail.
 
-### Control registers
-
-(TBA)
-
-### Floating Point registers (RV32F)
-
-(TBA)
-
-### Vector registers (RV32V)
-
-(TBA)
-
 ## Addressing
 
 Addressing formats like %pcrel_lo().  We can just link to the RISC-V PS ABI
