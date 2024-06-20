@@ -128,6 +128,7 @@ Latest Specifications draft repository:
 ### Instructions
 
 ## RISC-V ISA Specifications
+
 <https://riscv.org/specifications/>
 
 ### Instruction Aliases
@@ -551,6 +552,7 @@ in the C and C++ standards (i.e., decimal floating-point literals with decimal
 exponents as well as hexadecimal floating-point literals with binary exponents).
 
 Here are some examples:
+
 - 3.14159
 - 0.271828e1
 - 0x0.3p-4
@@ -836,6 +838,7 @@ round-to-zero can be written as `fcvt.w.s a0, fa0, rtz`. If unspecified, the
 default `dyn` rounding mode will be used.
 
 Supported rounding modes are as follows (must be specified in lowercase):
+
 - `rne`: round to nearest, ties to even
 - `rtz`: round towards zero
 - `rdn`: round down
