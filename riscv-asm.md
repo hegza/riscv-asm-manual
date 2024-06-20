@@ -904,7 +904,7 @@ fail_msg:
 ### <a name=pseudoinstructions></a> A listing of standard RISC-V pseudoinstructions
 
 Pseudoinstruction            | Base Instruction(s)                                           | Meaning   | Comment
-:----------------------------|:--------------------------------------------------------------|:----------|:--------|
+:----------------------------|:--------------------------------------------------------------|:----------|:--------
 la rd, symbol                | auipc rd, symbol[31:12]; addi rd, rd, symbol[11:0]            | Load address | With `.option nopic` (Default)
 la rd, symbol                | auipc rd, symbol@GOT[31:12]; l{w\|d} rd, symbol@GOT[11:0]\(rd\) | Load address | With `.option pic`
 lla rd, symbol               | auipc rd, symbol[31:12]; addi rd, rd, symbol[11:0]            | Load local address
