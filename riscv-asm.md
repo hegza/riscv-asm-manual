@@ -13,6 +13,7 @@ GNU as and LLVM's assembler support. Other assemblers might not support the
 same directives or pseudoinstructions; their dialects are outside the scope
 of this document.
 
+Original source: <https://github.com/riscv-non-isa/riscv-asm-manual/>
 
 ## Registers
 
