@@ -136,8 +136,7 @@ Directive    | Arguments                      | Description
 .file        | "filename"                     | emit filename FILE LOCAL symbol table
 .globl       | symbol_name                    | emit symbol_name to symbol table (scope GLOBAL)
 .local       | symbol_name                    | emit symbol_name to symbol table (scope LOCAL)
-.comm        | symbol_name,size,align         | emit common object to .bss section
-.common      | symbol_name,size,align         | emit common object to .bss section
+.common/.comm| symbol_name,size,align         | emit common object to .bss section
 .ident       | "string"                       | accepted for source compatibility
 .section     | [{.text,.data,.rodata,.bss}]   | emit section (if not present, default .text) and make current
 .size        | symbol, symbol                 | accepted for source compatibility
@@ -145,8 +144,7 @@ Directive    | Arguments                      | Description
 .data        |                                | emit .data section (if not present) and make current
 .rodata      |                                | emit .rodata section (if not present) and make current
 .bss         |                                | emit .bss section (if not present) and make current
-.string      | "string"                       | emit string
-.asciz       | "string"                       | emit string (alias for .string)
+.string/.asciz| "string"                      | emit string
 .equ         | name, value                    | constant definition
 .macro       | name arg1 [, argn]             | begin macro definition \\argname to substitute
 .endm        |                                | end macro definition
