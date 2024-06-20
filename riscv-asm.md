@@ -163,7 +163,7 @@ Directive    | Arguments                      | Description
 .string      | "string"                       | emit string
 .asciz       | "string"                       | emit string (alias for .string)
 .equ         | name, value                    | constant definition
-.macro       | name arg1 [, argn]             | begin macro definition \argname to substitute
+.macro       | name arg1 [, argn]             | begin macro definition \\argname to substitute
 .endm        |                                | end macro definition
 .type        | symbol, @function              | accepted for source compatibility
 .option      | {arch,rvc,norvc,pic,nopic,relax,norelax,push,pop} | RISC-V options. Refer to [.option](#.option) for a more detailed description.
