@@ -5,18 +5,6 @@ output: pdf_document
 ---
 # RISC-V Assembly Programmer's Manual
 
-## Copyright and License Information
-
-The RISC-V Assembly Programmer's Manual is
-
-  &copy; 2017 Palmer Dabbelt <palmer@dabbelt.com>
-  &copy; 2017 Michael Clark <michaeljclark@mac.com>
-  &copy; 2017 Alex Bradbury <asb@lowrisc.org>
-
-It is licensed under the Creative Commons Attribution 4.0 International License
-(CC-BY 4.0). The full license text is available at
-<https://creativecommons.org/licenses/by/4.0/>.
-
 ## Scope
 
 This document aims to provide guidance to assembly programmers targeting the
@@ -998,3 +986,15 @@ fsflags rd, rs    | csrrw rd, fflags, rs       | Swap FP exception flags
 fsflags rs        | csrrw x0, fflags, rs       | Write FP exception flags
 fsflagsi rd, imm  | csrrwi rd, fflags, imm     | Swap FP exception flags, immediate
 fsflagsi imm      | csrrwi x0, fflags, imm     | Write FP exception flags, immediate
+
+## Copyright and License Information
+
+The RISC-V Assembly Programmer's Manual is
+
+  &copy; 2017 Palmer Dabbelt <palmer@dabbelt.com>
+  &copy; 2017 Michael Clark <michaeljclark@mac.com>
+  &copy; 2017 Alex Bradbury <asb@lowrisc.org>
+
+It is licensed under the Creative Commons Attribution 4.0 International License
+(CC-BY 4.0). The full license text is available at
+<https://creativecommons.org/licenses/by/4.0/>.
