@@ -5,7 +5,7 @@ output: pdf_document
 ---
 # RISC-V Assembly Programmer's Manual
 
-# Copyright and License Information
+## Copyright and License Information
 
 The RISC-V Assembly Programmer's Manual is
 
@@ -17,7 +17,7 @@ It is licensed under the Creative Commons Attribution 4.0 International License
 (CC-BY 4.0). The full license text is available at
 <https://creativecommons.org/licenses/by/4.0/>.
 
-# Scope
+## Scope
 
 This document aims to provide guidance to assembly programmers targeting the
 standard RISC-V assembly language, which common open-source assemblers like
@@ -25,19 +25,19 @@ GNU as and LLVM's assembler support. Other assemblers might not support the
 same directives or pseudoinstructions; their dialects are outside the scope
 of this document.
 
-# Command-Line Arguments
+## Command-Line Arguments
 
 I think it's probably better to beef up the binutils documentation rather than
 duplicating it here.
 
-# Registers
+## Registers
 
 Registers are the most important part of any processor. RISC-V defines various
 types, depending on which extensions are included: The general registers (with
 the program counter), control registers, floating point registers (F extension),
 and vector registers (V extension).
 
-## General registers
+### General registers
 
 The RV32I base integer ISA includes 32 registers, named `x0` to `x31`. The
 program counter `PC` is separate from these registers, in contrast to other
@@ -98,24 +98,24 @@ function calls, while the **argument registers** `a0` to `a7` and the
 specialized registers such as `sp` by convention will be discussed later in more
 detail.
 
-## Control registers
+### Control registers
 
 (TBA)
 
-## Floating Point registers (RV32F)
+### Floating Point registers (RV32F)
 
 (TBA)
 
-## Vector registers (RV32V)
+### Vector registers (RV32V)
 
 (TBA)
 
-# Addressing
+## Addressing
 
 Addressing formats like %pcrel_lo().  We can just link to the RISC-V PS ABI
 document to describe what the relocations actually do.
 
-# Instruction Set
+## Instruction Set
 
 Official Specifications webpage:
 
@@ -125,12 +125,12 @@ Latest Specifications draft repository:
 
 - <https://github.com/riscv/riscv-isa-manual>
 
-## Instructions
+### Instructions
 
-# RISC-V ISA Specifications
+## RISC-V ISA Specifications
 <https://riscv.org/specifications/>
 
-## Instruction Aliases
+### Instruction Aliases
 
 ALIAS line from opcodes/riscv-opc.c
 
@@ -151,7 +151,7 @@ The _de facto_ standard implementation of this instruction is:
   form of `UNIMP` is emitted when targeting a system without the C extension,
   or when the `.option norvc` directive is used.
 
-## Pseudo Ops
+### Pseudo Ops
 
 Both the RISC-V-specific and GNU .-prefixed options.
 
@@ -202,7 +202,7 @@ Directive    | Arguments                      | Description
 .variant_cc  | symbol_name                    | annotate the symbol with variant calling convention
 .attribute   | name, value                    | RISC-V object attributes, more detailed description see [.attribute](#.attribute).
 
-## <a name=.attribute></a> `.attribute`
+### <a name=.attribute></a> `.attribute`
 
 The `.attribute` directive is used to record information about an object
 file/binary that a linker or runtime loader needs to check for compatibility.
@@ -227,9 +227,9 @@ ATTRIBUTE_VALUE := <string>
 
 ```
 
-### <a name=.option></a> `.option`
+#### <a name=.option></a> `.option`
 
-#### `rvc`/`norvc`
+##### `rvc`/`norvc`
 
 This option will be deprecated soon after `.option arch` has been widely
 implemented on main stream open source toolchains.
@@ -258,7 +258,7 @@ NOTE: There is a difference between `.option rvc`/`.option norvc` and
 `.option arch, +c`/`.option arch, -c`. The latter won't set EF_RISCV_RVC in the
 ELF flags.
 
-#### `arch`
+##### `arch`
 
 Enable and/or disable specific ISA extensions for the following code regions, but
 without changing the arch attribute and `EF_RISCV_RVC` in the ELF flags, that
@@ -300,7 +300,7 @@ Example:
 
 ```assembly
 .attribute arch, rv64imafdc
-# You can only use instructions from the i, m, a, f, d and c extensions.
+## You can only use instructions from the i, m, a, f, d and c extensions.
 memcpy_general:
     add     a5,a1,a2
     beq     a1,a5,.L2
@@ -381,13 +381,13 @@ NOTE: `.option arch, +<ext>, -<ext>` is accepted and will result in enabling the
 extensions that depend on `ext`, e.g. `rv32i` + `.option arch, +v, -v` will result
 `rv32ifd_zve32x_zve32f_zve64x_zve64f_zve64d_zvl32b_zvl64b_zvl128b`.
 
-#### `pic`/`nopic`
+##### `pic`/`nopic`
 
 Set the code model to PIC (position independent code) or non-PIC. This will
 affect the expansion of the `la` pseudoinstruction, refer to
 [listing of standard RISC-V pseudoinstructions](#pseudoinstructions).
 
-#### `relax`/`norelax`
+##### `relax`/`norelax`
 
 Enable/disable linker relaxation for the following code region.
 
@@ -400,11 +400,11 @@ NOTE: Recommended way to disable linker relaxation of specific code region is
 use `.option push`, `.option norelax` and `.option pop`, that prevent enabled
 linker relaxation accidentally if user already disable linker relaxation.
 
-#### `push`/`pop`
+##### `push`/`pop`
 
 Push/pop current options to/from the options stack.
 
-## Assembler Relocation Functions
+### Assembler Relocation Functions
 
 The following table lists assembler relocation expansions:
 
@@ -854,35 +854,35 @@ set and wait for a timer interrupt to occur:
 .equ RTC_BASE,      0x40000000
 .equ TIMER_BASE,    0x40004000
 
-# setup machine trap vector
+## setup machine trap vector
 1:      auipc   t0, %pcrel_hi(mtvec)        # load mtvec(hi)
         addi    t0, t0, %pcrel_lo(1b)       # load mtvec(lo)
         csrrw   zero, mtvec, t0
 
-# set mstatus.MIE=1 (enable M mode interrupt)
+## set mstatus.MIE=1 (enable M mode interrupt)
         li      t0, 8
         csrrs   zero, mstatus, t0
 
-# set mie.MTIE=1 (enable M mode timer interrupts)
+## set mie.MTIE=1 (enable M mode timer interrupts)
         li      t0, 128
         csrrs   zero, mie, t0
 
-# read from mtime
+## read from mtime
         li      a0, RTC_BASE
         ld      a1, 0(a0)
 
-# write to mtimecmp
+## write to mtimecmp
         li      a0, TIMER_BASE
         li      t0, 1000000000
         add     a1, a1, t0
         sd      a1, 0(a0)
 
-# loop
+## loop
 loop:
         wfi
         j loop
 
-# break on interrupt
+## break on interrupt
 mtvec:
         csrrc  t0, mcause, zero
         bgez t0, fail       # interrupt causes are less than zero
@@ -911,7 +911,7 @@ fail_msg:
         .string "FAIL\n"
 ```
 
-## <a name=pseudoinstructions></a> A listing of standard RISC-V pseudoinstructions
+### <a name=pseudoinstructions></a> A listing of standard RISC-V pseudoinstructions
 
 Pseudoinstruction            | Base Instruction(s)                                           | Meaning   | Comment
 :----------------------------|:--------------------------------------------------------------|:----------|:--------|
@@ -968,7 +968,7 @@ pause                        | fence w, 0                                       
 
 [^1] The compiler can generate different instruction sequences to load a specific numeric value into a register.
 
-## Pseudoinstructions for accessing control and status registers
+### Pseudoinstructions for accessing control and status registers
 
 Pseudoinstruction | Base Instruction(s)        | Meaning
 :---------------- |:---------------------------|:-------
