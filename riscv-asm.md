@@ -84,7 +84,7 @@ detail.
 
 ## Addressing
 
-Addressing formats like %pcrel_lo().  We can just link to the RISC-V PS ABI
+Addressing formats like `%pcrel_lo()`.  We can just link to the RISC-V PS ABI
 document to describe what the relocations actually do.
 
 ## Instruction Set
